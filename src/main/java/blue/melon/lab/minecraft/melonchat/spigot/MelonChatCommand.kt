@@ -14,7 +14,7 @@ class MelonChatCommand(private val pluginInstance: SpigotLoader) : CommandExecut
         when (args[0]) {
             "reload" -> {
                 try {
-                    pluginInstance.reloadConfigFile()
+                    pluginInstance.reloadConfigFile(sender)
                     sender.sendMessage(Utils.applyFormatCode("${Constant.PLUGIN_PREFIX_COLOR}[MelonChat] ${Constant.PLUGIN_NOTICE_COLOR}plugin reloaded."))
                 } catch (exception: IOException) {
                     exception.printStackTrace()

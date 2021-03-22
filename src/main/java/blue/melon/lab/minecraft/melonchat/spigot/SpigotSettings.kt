@@ -27,6 +27,6 @@ class SpigotSettings {
 
     @SerializedName("loopbackMessageNotice")
     @Expose
-    val loopbackMessageNotice = "&#F9A8D4[MelonChat] &#C4B5FDYou are not able to send private message to yourself."
+    val loopbackMessageNotice = "&#3B82F6[MelonChat] &#DBEAFEYou are not able to send private message to yourself."
 
 }

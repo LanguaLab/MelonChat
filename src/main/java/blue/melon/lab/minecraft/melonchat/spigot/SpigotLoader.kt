@@ -1,8 +1,10 @@
 package blue.melon.lab.minecraft.melonchat.spigot
 
 import blue.melon.lab.minecraft.melonchat.Constant
+import blue.melon.lab.minecraft.melonchat.Utils
 import com.google.gson.GsonBuilder
 import org.bukkit.Bukkit
+import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.io.FileOutputStream
@@ -11,12 +13,11 @@ import java.io.IOException
 
 class SpigotLoader : JavaPlugin() {
     lateinit var spigotSettings: SpigotSettings
-    private lateinit var configFile: File
+    private val configFile = File(dataFolder, "config.json")
     private val gsonInstance = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
 
     override fun onEnable() {
         dataFolder.mkdir()
-        configFile = File(dataFolder, "config.json")
         spigotSettings = loadConfigFile(configFile)
 
         if (spigotSettings.usePlaceholderApi && Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
@@ -56,13 +57,13 @@ class SpigotLoader : JavaPlugin() {
     }
 
     @Throws(IOException::class)
-    fun reloadConfigFile() {
+    fun reloadConfigFile(sender: CommandSender) {
         dataFolder.mkdir()
         this.spigotSettings = loadConfigFile(this.configFile)
 
         if (this.spigotSettings.usePlaceholderApi && Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             this.spigotSettings.usePlaceholderApi = false
-            logger.warning("Bukkit plugin PlaceholderAPI was not detected. \"usePlaceholderApi\" was automatically set to false.")
+            sender.sendMessage(Utils.applyFormatCode("${Constant.PLUGIN_PREFIX_COLOR}[MelonChat] ${Constant.PLUGIN_WARN_COLOR}Bukkit plugin PlaceholderAPI was not detected. \"usePlaceholderApi\" was automatically set to false."))
         }
 
         saveSettings(configFile, spigotSettings)
