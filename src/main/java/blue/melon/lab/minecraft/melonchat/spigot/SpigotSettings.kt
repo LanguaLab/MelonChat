@@ -25,4 +25,8 @@ class SpigotSettings {
     @Expose
     val playerOfflineNotice = "&#4B5563It looks like \${target} is not available for now."
 
+    @SerializedName("loopbackMessageNotice")
+    @Expose
+    val loopbackMessageNotice = "&#F9A8D4[MelonChat] &#C4B5FDYou are not able to send private message to yourself."
+
 }

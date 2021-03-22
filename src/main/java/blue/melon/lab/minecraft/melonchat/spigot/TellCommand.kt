@@ -1,6 +1,7 @@
 package blue.melon.lab.minecraft.melonchat.spigot
 
 import blue.melon.lab.minecraft.melonchat.Constant
+import blue.melon.lab.minecraft.melonchat.Utils
 import blue.melon.lab.minecraft.melonchat.message.Message
 import com.google.gson.GsonBuilder
 import me.clip.placeholderapi.PlaceholderAPI
@@ -17,6 +18,11 @@ class TellCommand(private val pluginInstance: SpigotLoader) : CommandExecutor {
         }
 
         if (args.size != 2) return false
+
+        if (sender.name == args[0]) {
+            sender.sendMessage(Utils.applyFormatCode(pluginInstance.spigotSettings.loopbackMessageNotice))
+            return true
+        }
 
         val pattern = when {
             pluginInstance.spigotSettings.usePlaceholderApi -> PlaceholderAPI.setPlaceholders(
