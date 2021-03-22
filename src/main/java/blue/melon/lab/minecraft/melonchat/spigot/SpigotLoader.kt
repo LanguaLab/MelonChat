@@ -52,8 +52,21 @@ class SpigotLoader : JavaPlugin() {
         )
 
         Bukkit.getPluginCommand("tell")!!.setExecutor(TellCommand(this))
+        Bukkit.getPluginCommand("melonchat")!!.setExecutor(MelonChatCommand(this))
     }
 
+    @Throws(IOException::class)
+    fun reloadConfigFile() {
+        dataFolder.mkdir()
+        this.spigotSettings = loadConfigFile(this.configFile)
+
+        if (this.spigotSettings.usePlaceholderApi && Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            this.spigotSettings.usePlaceholderApi = false
+            logger.warning("Bukkit plugin PlaceholderAPI was not detected. \"usePlaceholderApi\" was automatically set to false.")
+        }
+
+        saveSettings(configFile, spigotSettings)
+    }
 
     @Throws(IOException::class)
     private fun loadConfigFile(configFile: File): SpigotSettings {

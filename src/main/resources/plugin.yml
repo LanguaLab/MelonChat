@@ -8,7 +8,12 @@ commands:
   tell:
     permission: melonchat.tell
     default: true
+    usage: /tell <player> <message>
     aliases:
       - w
       - wisper
       - t
+  melonchat:
+    permission: melonchat.reload
+    default: op
+    usage: /melonchat reload
