@@ -11,7 +11,7 @@ class SpigotSettings {
 
     @SerializedName("usePlaceholderApi")
     @Expose
-    val usePlaceholderApi = false
+    var usePlaceholderApi = false
 
     @SerializedName("normalMessagePattern")
     @Expose

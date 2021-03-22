@@ -18,6 +18,12 @@ class SpigotLoader : JavaPlugin() {
         dataFolder.mkdir()
         configFile = File(dataFolder, "config.json")
         spigotSettings = loadConfigFile(configFile)
+
+        if (spigotSettings.usePlaceholderApi && Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            spigotSettings.usePlaceholderApi = false
+            logger.warning("Bukkit plugin PlaceholderAPI was not detected. \"usePlaceholderApi\" was automatically set to false.")
+        }
+
         saveSettings(configFile, spigotSettings)
 
         if (spigotSettings.channel == Constant.TELL_FAILURE_NOTICE_CHANNEL) {
