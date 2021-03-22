@@ -6,7 +6,7 @@ import net.md_5.bungee.api.ChatColor
 object Utils {
     //private val colorFormatterRegex = "[&][0-fk-or]|[&][#][0-f]{6}".toRegex()
     //private val gsonInstance = Gson()
-    private val hexColorPattern: Regex = "[&][#][0-f]{6}".toRegex()
+    private val hexColorPattern: Regex = "[&][#][0-9A-Fa-f]{6}".toRegex()
     private const val chars = "23456789ABCDEFHKMNPQRSTUVWXYZ+$%"
 
     fun applyFormatCode(message: String): String {
