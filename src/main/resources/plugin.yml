@@ -1,0 +1,14 @@
+name: MelonChat
+main: blue.melon.lab.minecraft.melonchat.spigot.SpigotLoader
+version: ${project.version}
+author: langua
+softdepend: [PlaceholderAPI]
+api-version: 1.13
+commands:
+  tell:
+    permission: melonchat.tell
+    default: true
+    aliases:
+      - w
+      - wisper
+      - t

@@ -1,0 +1,4 @@
+name: MelonChat
+main: blue.melon.lab.minecraft.melonchat.bungeecord.BungeeLoader
+version: ${project.version}
+author: langua
