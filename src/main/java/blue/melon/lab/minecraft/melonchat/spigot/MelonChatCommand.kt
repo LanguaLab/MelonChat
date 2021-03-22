@@ -1,5 +1,6 @@
 package blue.melon.lab.minecraft.melonchat.spigot
 
+import blue.melon.lab.minecraft.melonchat.Constant
 import blue.melon.lab.minecraft.melonchat.Utils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -14,10 +15,10 @@ class MelonChatCommand(private val pluginInstance: SpigotLoader) : CommandExecut
             "reload" -> {
                 try {
                     pluginInstance.reloadConfigFile()
-                    sender.sendMessage(Utils.applyFormatCode("&#EC4899[MelonChat] &#FBCFE8plugin reloaded."))
+                    sender.sendMessage(Utils.applyFormatCode("${Constant.PLUGIN_PREFIX_COLOR}[MelonChat] ${Constant.PLUGIN_NOTICE_COLOR}plugin reloaded."))
                 } catch (exception: IOException) {
                     exception.printStackTrace()
-                    sender.sendMessage(Utils.applyFormatCode("&#EC4899[MelonChat] &#FBCFE8IOException occurred while reloading the plugin. Check console for more information."))
+                    sender.sendMessage(Utils.applyFormatCode("${Constant.PLUGIN_PREFIX_COLOR}[MelonChat] ${Constant.PLUGIN_NOTICE_COLOR}IOException occurred while reloading the plugin. Check console for more information."))
                 }
                 return true
             }
