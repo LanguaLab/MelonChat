@@ -2,7 +2,6 @@ package blue.melon.lab.minecraft.melonchat.spigot
 
 import blue.melon.lab.minecraft.melonchat.Constant
 import blue.melon.lab.minecraft.melonchat.Utils
-import blue.melon.lab.minecraft.melonchat.message.Message
 import blue.melon.lab.minecraft.melonchat.message.MessageContainer
 import blue.melon.lab.minecraft.melonchat.message.TellFailure
 import com.google.gson.GsonBuilder

@@ -44,5 +44,7 @@ class ChatListener(private val pluginInstance: SpigotLoader) : Listener {
             )
                 .toByteArray(Charsets.UTF_8)
         )
+
+        println("<${event.player.name}> ${Utils.applyFormatCode(event.message)}")
     }
 }
