@@ -3,6 +3,7 @@ package blue.melon.lab.minecraft.melonchat.spigot
 import blue.melon.lab.minecraft.melonchat.Constant
 import blue.melon.lab.minecraft.melonchat.Utils
 import blue.melon.lab.minecraft.melonchat.message.Message
+import blue.melon.lab.minecraft.melonchat.message.MessageContainer
 import blue.melon.lab.minecraft.melonchat.message.TellFailure
 import com.google.gson.GsonBuilder
 import me.clip.placeholderapi.PlaceholderAPI
@@ -16,22 +17,22 @@ class BungeeMessageListener(private val pluginInstance: SpigotLoader) : PluginMe
     override fun onPluginMessageReceived(channel: String, player: Player, messageByteArray: ByteArray) {
         if (!channel.startsWith("melon_chat:")) return
 
-        when (channel.substring(11, channel.length)) {
+        when (channel) {
             Constant.STANDARD_CHANNEL -> {
-                val message = gsonInstance.fromJson(
+                val messageContainer = gsonInstance.fromJson(
                     String(messageByteArray, Charsets.UTF_8),
-                    Message::class.java
+                    MessageContainer::class.java
                 )
 
-                when (message.target) {
-                    "MELON_CHAT_REVERSED_BROADCAST" -> {
+                when (messageContainer.to) {
+                    Constant.BROADCAST_CHANNEL -> {
                         Bukkit.getOnlinePlayers().forEach {
-                            it.sendMessage(Utils.applyFormatCode(Utils.applyPatternFromMessageInstance(message)))
+                            it.sendMessage(Utils.applyFormatCode(Utils.applyPatternFromMessageInstance(messageContainer.content)))
                         }
                     }
                     else -> {
-                        val player = Bukkit.getPlayerExact(message.target) ?: return
-                        player.sendMessage(Utils.applyFormatCode(Utils.applyPatternFromMessageInstance(message)))
+                        val player = Bukkit.getPlayerExact(messageContainer.to) ?: return
+                        player.sendMessage(Utils.applyFormatCode(Utils.applyPatternFromMessageInstance(messageContainer.content)))
                     }
                 }
             }

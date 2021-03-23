@@ -1,7 +1,9 @@
 package blue.melon.lab.minecraft.melonchat.spigot
 
 import blue.melon.lab.minecraft.melonchat.Constant
+import blue.melon.lab.minecraft.melonchat.Utils
 import blue.melon.lab.minecraft.melonchat.message.Message
+import blue.melon.lab.minecraft.melonchat.message.MessageContainer
 import com.google.gson.GsonBuilder
 import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.event.EventHandler
@@ -29,11 +31,15 @@ class ChatListener(private val pluginInstance: SpigotLoader) : Listener {
             pluginInstance,
             Constant.STANDARD_CHANNEL,
             gsonInstance.toJson(
-                Message(
-                    pattern,
+                MessageContainer(
                     event.player.name,
-                    "MELON_CHAT_REVERSED_BROADCAST",
-                    event.message
+                    Constant.BROADCAST_CHANNEL,
+                    Message(
+                        event.player.name,
+                        Constant.BROADCAST_CHANNEL,
+                        pattern,
+                        event.message
+                    )
                 )
             )
                 .toByteArray(Charsets.UTF_8)

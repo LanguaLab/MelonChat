@@ -3,6 +3,7 @@ package blue.melon.lab.minecraft.melonchat.spigot
 import blue.melon.lab.minecraft.melonchat.Constant
 import blue.melon.lab.minecraft.melonchat.Utils
 import blue.melon.lab.minecraft.melonchat.message.Message
+import blue.melon.lab.minecraft.melonchat.message.MessageContainer
 import com.google.gson.GsonBuilder
 import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.command.Command
@@ -35,11 +36,15 @@ class TellCommand(private val pluginInstance: SpigotLoader) : CommandExecutor {
         (sender as Player).sendPluginMessage(
             pluginInstance, Constant.STANDARD_CHANNEL,
             gsonInstance.toJson(
-                Message(
-                    pattern,
+                MessageContainer(
                     sender.name,
                     args[0],
-                    args[1]
+                    Message(
+                        sender.name,
+                        args[0],
+                        pattern,
+                        args[1]
+                    )
                 )
             ).toByteArray(Charsets.UTF_8)
         )
