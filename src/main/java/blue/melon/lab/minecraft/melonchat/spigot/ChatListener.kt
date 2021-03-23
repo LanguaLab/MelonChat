@@ -27,7 +27,7 @@ class ChatListener(private val pluginInstance: SpigotLoader) : Listener {
 
         event.player.sendPluginMessage(
             pluginInstance,
-            Constant.CHANNEL_PREFIX + pluginInstance.spigotSettings.channel,
+            Constant.STANDARD_CHANNEL,
             gsonInstance.toJson(
                 Message(
                     pattern,

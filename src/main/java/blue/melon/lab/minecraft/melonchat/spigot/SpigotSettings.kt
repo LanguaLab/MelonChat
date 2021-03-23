@@ -5,10 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 class SpigotSettings {
 
-    @SerializedName("channel")
-    @Expose
-    val channel = "standard"
-
     @SerializedName("usePlaceholderApi")
     @Expose
     var usePlaceholderApi = false

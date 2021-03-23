@@ -27,29 +27,24 @@ class SpigotLoader : JavaPlugin() {
 
         saveSettings(configFile, spigotSettings)
 
-        if (spigotSettings.channel == Constant.TELL_FAILURE_NOTICE_CHANNEL) {
-            Bukkit.getPluginManager().disablePlugin(this)
-            throw IllegalArgumentException("Channel ${Constant.TELL_FAILURE_NOTICE_CHANNEL} is system reversed, which is not be able to used as a broadcast channel.")
-        }
-
         Bukkit.getPluginManager().registerEvents(ChatListener(this), this)
 
         val bungeeMessageListener = BungeeMessageListener(this)
         this.server.messenger.registerIncomingPluginChannel(
             this,
-            Constant.CHANNEL_PREFIX + spigotSettings.channel,
+            Constant.STANDARD_CHANNEL,
             bungeeMessageListener
         )
         this.server.messenger.registerIncomingPluginChannel(
             this,
-            Constant.CHANNEL_PREFIX + Constant.TELL_FAILURE_NOTICE_CHANNEL,
+            Constant.TELL_FAILURE_NOTICE_CHANNEL,
             bungeeMessageListener
         )
 
-        this.server.messenger.registerOutgoingPluginChannel(this, Constant.CHANNEL_PREFIX + spigotSettings.channel)
+        this.server.messenger.registerOutgoingPluginChannel(this, Constant.STANDARD_CHANNEL)
         this.server.messenger.registerOutgoingPluginChannel(
             this,
-            Constant.CHANNEL_PREFIX + Constant.TELL_FAILURE_NOTICE_CHANNEL
+            Constant.TELL_FAILURE_NOTICE_CHANNEL
         )
 
         Bukkit.getPluginCommand("tell")!!.setExecutor(TellCommand(this))

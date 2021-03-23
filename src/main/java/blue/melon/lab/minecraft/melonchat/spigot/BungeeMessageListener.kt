@@ -17,7 +17,7 @@ class BungeeMessageListener(private val pluginInstance: SpigotLoader) : PluginMe
         if (!channel.startsWith("melon_chat:")) return
 
         when (channel.substring(11, channel.length)) {
-            pluginInstance.spigotSettings.channel -> {
+            Constant.STANDARD_CHANNEL -> {
                 val message = gsonInstance.fromJson(
                     String(messageByteArray, Charsets.UTF_8),
                     Message::class.java

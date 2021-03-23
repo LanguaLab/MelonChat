@@ -33,7 +33,7 @@ class TellCommand(private val pluginInstance: SpigotLoader) : CommandExecutor {
         }
 
         (sender as Player).sendPluginMessage(
-            pluginInstance, Constant.CHANNEL_PREFIX + pluginInstance.spigotSettings.channel,
+            pluginInstance, Constant.STANDARD_CHANNEL,
             gsonInstance.toJson(
                 Message(
                     pattern,

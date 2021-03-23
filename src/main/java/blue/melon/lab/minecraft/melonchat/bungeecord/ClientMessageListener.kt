@@ -13,9 +13,6 @@ class ClientMessageListener(private val pluginInstance: BungeeLoader) : Listener
 
     @EventHandler
     fun onPluginMessage(event: PluginMessageEvent) {
-        if (!pluginInstance.bungeeSettings.channels.contains(event.tag.substring(11, event.tag.length)))
-            return
-
         val message = gsonInstance.fromJson(String(event.data, Charsets.UTF_8), Message::class.java)
 
         when (message.target) {
@@ -29,7 +26,7 @@ class ClientMessageListener(private val pluginInstance: BungeeLoader) : Listener
                 val targetPlayer = pluginInstance.proxy.getPlayer(message.target)
                 if (targetPlayer == null) {
                     pluginInstance.proxy.getPlayer(message.source).server.info.sendData(
-                        Constant.CHANNEL_PREFIX + Constant.TELL_FAILURE_NOTICE_CHANNEL, gsonInstance.toJson(
+                        Constant.TELL_FAILURE_NOTICE_CHANNEL, gsonInstance.toJson(
                             TellFailure(
                                 message.source,
                                 message.target
