@@ -13,6 +13,8 @@ commands:
       - w
       - wisper
       - t
+      - m
+      - message
   melonchat:
     permission: melonchat.reload
     default: op
