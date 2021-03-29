@@ -18,7 +18,7 @@ class TellCommand(private val pluginInstance: SpigotLoader) : CommandExecutor {
             sender.sendMessage("This command can only be used by a player.")
         }
 
-        if (args.size != 2) return false
+        if (args.size < 2) return false
 
         if (sender.name == args[0]) {
             sender.sendMessage(Utils.applyFormatCode(pluginInstance.spigotSettings.loopbackMessageNotice))
@@ -33,6 +33,14 @@ class TellCommand(private val pluginInstance: SpigotLoader) : CommandExecutor {
             else -> pluginInstance.spigotSettings.privateMessagePattern
         }
 
+        val messageBuilder = StringBuilder()
+        for (i in args.indices) {
+            if (i == 0) continue
+            messageBuilder.append(args[i])
+            if (i < args.size - 1)
+                messageBuilder.append(" ")
+        }
+
         (sender as Player).sendPluginMessage(
             pluginInstance, Constant.STANDARD_CHANNEL,
             gsonInstance.toJson(
@@ -43,7 +51,7 @@ class TellCommand(private val pluginInstance: SpigotLoader) : CommandExecutor {
                         sender.name,
                         args[0],
                         pattern,
-                        args[1]
+                        messageBuilder.toString()
                     )
                 )
             ).toByteArray(Charsets.UTF_8)
